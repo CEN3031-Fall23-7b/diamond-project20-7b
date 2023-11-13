@@ -21,6 +21,7 @@ export default function LessonEditor({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [displayName, setDisplayName] = useState(learningStandard.name)
+  const [visibleVal, setVisibleVal] = useState(false);
   
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
@@ -128,7 +129,15 @@ export default function LessonEditor({
               placeholder="Enter lesson standards"
             />
           </Form.Item>
-          
+
+          <Form.Item
+            label="Visible to students"
+            name="visibleToStudents"
+            valuePropName="checked"
+          >
+            <Checkbox onChange={e => setVisibleVal(e.target.checked)}/>
+          </Form.Item>
+
           <Form.Item label="Link to Additional Resources (Optionals)">
             <Input
               onChange={e => {
