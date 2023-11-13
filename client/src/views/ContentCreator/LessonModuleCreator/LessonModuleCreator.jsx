@@ -1,6 +1,6 @@
 import { Button, Form, Input, message, Modal,Checkbox } from "antd"
 import React, { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import {
   createActivity,
   createLessonModule,
@@ -212,6 +212,16 @@ export default function LessonModuleCreator({
               placeholder="Enter a link"
             />
           </Form.Item>
+
+          <Form.Item
+            label="Add Code Replay"
+            name="addcodereplay"
+          >
+            <Link id='replay-btn' className='btn' to={`/replay/1`}>
+              Add
+            </Link>
+          </Form.Item>
+
           <Form.Item
             wrapperCol={{
               offset: 8,
