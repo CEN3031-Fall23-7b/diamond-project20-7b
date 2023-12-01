@@ -887,9 +887,8 @@
           "activity_template": {
             "type": "string"
           },
-          "student_vis": {
-            "type": "boolean",
-            "default": true
+          "replay": {
+            "type": "object"
           }
         }
       },
@@ -935,9 +934,8 @@
           "activity_template": {
             "type": "string"
           },
-          "student_vis": {
-            "type": "boolean",
-            "default": true
+          "replay": {
+            "type": "object"
           },
           "created_by": {
             "type": "string"

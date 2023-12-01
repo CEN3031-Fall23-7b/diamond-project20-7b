@@ -47,9 +47,8 @@
       "type": "text",
       "required": false
     },
-    "student_vis": {
-      "type": "boolean",
-      "default": true
+    "replay": {
+      "type": "json"
     }
   }
 }

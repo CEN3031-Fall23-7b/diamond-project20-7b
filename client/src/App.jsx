@@ -10,6 +10,7 @@ import Classroom from './views/Mentor/Classroom/Classroom';
 import Dashboard from './views/Mentor/Dashboard/Dashboard';
 import NotFound from './views/NotFound';
 import Replay from './views/Replay/Replay';
+import CCReplay from './views/Replay/CCReplay';
 import ActivityLevelReport from './views/Researcher/ActivityLevelReport';
 import ActivityLevelReportView from './views/Researcher/ActivityLevelReportView';
 import GroupReport from './views/Researcher/GroupReport';
@@ -31,6 +32,7 @@ const App = () => {
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
+        <Route path='/ccreplay/:saveID' element={<CCReplay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route
           path='/report'

@@ -21,7 +21,7 @@ export default function BlocklyPage({ isSandbox }) {
   const navigate = useNavigate()
   const [splitOpen, setSplitOpen] = useState(false)
   const [splitScreenEnabled, setSplitScreenEnabled] = useState(false);
-  const [disableSplit, setDisableSplit] = useState(false);
+  const [disableSplit, setDisableSplit] = useState(true);
 
   useEffect(() => {
     const setup = async () => {
@@ -96,7 +96,7 @@ export default function BlocklyPage({ isSandbox }) {
         setSplitOpen(!splitOpen);
       }
     else{
-      setSplitOpen(false);
+      setSplitOpen(true);
     }
   };
   //handles toggling split-screen 

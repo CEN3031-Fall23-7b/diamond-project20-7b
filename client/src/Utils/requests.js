@@ -342,13 +342,14 @@ export const updateActivityLevelTemplate = async (id, workspace, blocksList) =>
     error: 'Failed to update the template for the activity',
   });
 
-export const updateActivityTemplate = async (id, workspace) =>
+export const updateActivityTemplate = async (id, workspace, replay) =>
   makeRequest({
     method: PUT,
     path: `${server}/activities/activity_template/${id}`,
     data: {
       activity_template: workspace,
       //blocks: blocksList,
+      replay,
     },
     auth: true,
     error: 'Failed to update the activity template for the activity',

@@ -199,11 +199,10 @@ export const handleCreatorSaveActivityLevel = async (activityId, workspaceRef, b
   return await updateActivityLevelTemplate(activityId, xml_text, blocksList);
 };
 
-export const handleCreatorSaveActivity = async (activityId, workspaceRef) => {
+export const handleCreatorSaveActivity = async (activityId, workspaceRef, replay) => {
   let xml = window.Blockly.Xml.workspaceToDom(workspaceRef.current);
   let xml_text = window.Blockly.Xml.domToText(xml);
-
-  return await updateActivityTemplate(activityId, xml_text);
+  return await updateActivityTemplate(activityId, xml_text, replay);
 };
 
 export const handleSaveAsWorkspace = async (
