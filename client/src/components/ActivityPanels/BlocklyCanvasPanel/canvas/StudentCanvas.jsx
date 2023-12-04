@@ -16,7 +16,7 @@ import {
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import SplitScreenArrows from '../Icons/double-arrows.svg'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 let plotId = 1;
 
@@ -389,11 +389,15 @@ export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
                     </Col>
                   </Col>
 
-
+                  
                   {/* Control Panel */}
                   <Col className={"control-col"} style={{justifyContent: "flex-end"}}>
                     <Col id={"controls-container"}>
                     <div id='action-btn-container'>
+
+                      <Link id='new-btn' className='btn' to={`/ccreplay/${activity.id}`}>
+                        View Code Replay
+                      </Link>
 
                       {/*Save*/}
                       <button

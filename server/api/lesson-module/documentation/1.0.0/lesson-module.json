@@ -597,6 +597,9 @@
                 "replay": {
                   "type": "object"
                 },
+                "student_vis": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },

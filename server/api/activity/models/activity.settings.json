@@ -49,6 +49,9 @@
     },
     "replay": {
       "type": "json"
+    },
+    "student_vis": {
+      "type": "boolean"
     }
   }
 }

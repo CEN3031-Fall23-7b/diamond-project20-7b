@@ -1,6 +1,6 @@
 import { message } from "antd"
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import BlocklyCanvasPanel from "../../components/ActivityPanels/BlocklyCanvasPanel/BlocklyCanvasPanel"
 import NavBar from "../../components/NavBar/NavBar"
 import Blank from "./Blank";
@@ -19,9 +19,10 @@ export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
   const [activity, setActivity] = useState({})
   const navigate = useNavigate()
-  const [splitOpen, setSplitOpen] = useState(false)
+  //below modified to be true because of backend issues
+  const [splitOpen, setSplitOpen] = useState(true)
   const [splitScreenEnabled, setSplitScreenEnabled] = useState(false);
-  const [disableSplit, setDisableSplit] = useState(true);
+  const [disableSplit, setDisableSplit] = useState(false);
 
   useEffect(() => {
     const setup = async () => {
@@ -96,7 +97,7 @@ export default function BlocklyPage({ isSandbox }) {
         setSplitOpen(!splitOpen);
       }
     else{
-      setSplitOpen(true);
+      setSplitOpen(false);
     }
   };
   //handles toggling split-screen 
@@ -105,6 +106,11 @@ export default function BlocklyPage({ isSandbox }) {
     setSplitOpen(false); //Close split-screen when disabling
   };
 
+  const displayCodeReplay = () => {
+    <Link id='replay-btn' className='btn' to={`/ccreplay/${activity.id}`}>
+            View Code Replay
+    </Link>
+  };
 
     return (
         <div className="container nav-padding">
@@ -120,10 +126,7 @@ export default function BlocklyPage({ isSandbox }) {
             className="flex flex-row"
             >
                 <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} toggleSplit={handleToggleSplit}/>
-                <SplitPane split="vertical">
-                    <Blank />
-                    <CodeReplay />
-                </SplitPane>
+                <Blank />
             </SplitPane>
           ) :
           (
