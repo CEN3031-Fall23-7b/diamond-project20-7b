@@ -345,6 +345,19 @@ import React, {
                       }
                       key={item.timestamp}
                       onClick={() => setStep(index)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'ArrowLeft') {
+                          //handle moving timeline backwards
+                          // Call dispatchTimelineReducer with DecrementStep action
+                          console.log('Arrow Left')
+                        } else if (event.key === 'ArrowRight') {
+                          // Handle moving timeline forward
+                          // Call dispatchTimelineReducer with IncrementStep action
+                          console.log('ArrowRight')
+                        }
+                      }}
+                      tabIndex={0}
+                    
                     >
                       {formatMyDate(item.timestamp)}
                     </div>
