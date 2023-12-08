@@ -46,6 +46,12 @@
     "activity_template": {
       "type": "text",
       "required": false
+    },
+    "replay": {
+      "type": "json"
+    },
+    "student_vis": {
+      "type": "boolean"
     }
   }
 }

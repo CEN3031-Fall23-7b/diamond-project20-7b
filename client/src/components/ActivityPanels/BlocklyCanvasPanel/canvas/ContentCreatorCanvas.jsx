@@ -54,10 +54,14 @@ export default function ContentCreatorCanvas({
   const workspaceRef = useRef(null);
   const activityRef = useRef(null);
 
+  const replayRef = useRef([]);
+  const clicks = useRef(0);
+
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
     });
+    window.Blockly.addChangeListener(blocklyEvent);
   };
 
   const loadSave = async (workspaceId) => {
@@ -111,6 +115,82 @@ export default function ContentCreatorCanvas({
     }
   };
 
+  //below is new stuff for replay
+
+  const pushEvent = (type, blockId = '') => {
+    let blockType = '';
+    if (blockId !== '') {
+      let type = window.Blockly.mainWorkspace.getBlockById(blockId)?.type;
+      type ? blockType = type : blockType = ''; 
+    }
+
+    let xml = window.Blockly.Xml.workspaceToDom(workspaceRef.current);
+    let xml_text = window.Blockly.Xml.domToText(xml);
+    replayRef.current.push({
+      xml: xml_text,
+      action: type,
+      blockId: blockId,
+      blockType: blockType,
+      timestamp: Date.now(),
+      clicks: clicks.current,
+    });
+  };
+
+  let blocked = false;
+  const blocklyEvent = (event) => {
+    // if it is a click event, add click
+    if (
+      (event.type === 'ui' && event.element === 'click') ||
+      event.element === 'selected'
+    ) {
+      clicks.current++;
+    }
+
+    // if it is other ui events or create events or is [undo, redo], return
+    if (event.type === 'ui' || !event.recordUndo) {
+      return;
+    }
+
+    // if event is in timeout, return
+    if (event.type === 'change' && blocked) {
+      return;
+    }
+
+    // if the event is change field value, only accept the latest change
+    if (
+      event.type === 'change' &&
+      event.element === 'field' &&
+      replayRef.current.length > 1 &&
+      replayRef.current[replayRef.current.length - 1].action ===
+        'change field' &&
+      replayRef.current[replayRef.current.length - 1].blockId === event.blockId
+    ) {
+      replayRef.current.pop();
+    }
+
+    // event delete always comes after a move, ignore the move
+    if (event.type === 'delete') {
+      if (replayRef.current[replayRef.current.length - 1].action === 'move') {
+        replayRef.current.pop();
+      }
+    }
+
+    // if event is change, add the detail action type
+    if (event.type === 'change' && event.element) {
+      pushEvent(`${event.type} ${event.element}`, event.blockId);
+    } else {
+      pushEvent(event.type, event.blockId);
+    }
+
+    // timeout for half a second
+    blocked = true;
+    setTimeout(() => {
+      blocked = false;
+    }, 500);
+  };
+
+  //*******above is new stuff for replay events*********/
+
   const handleGoBack = () => {
     if (
       window.confirm(
@@ -152,7 +232,8 @@ export default function ContentCreatorCanvas({
       }
     } else if (!isSandbox && isMentorActivity) {
       // Save activity template
-      const res = await handleCreatorSaveActivity(activity.id, workspaceRef);
+      const res = await handleCreatorSaveActivity(activity.id, workspaceRef, replayRef);
+      console.log("this is working");
       if (res.err) {
         message.error(res.err);
       } else {

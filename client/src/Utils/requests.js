@@ -342,13 +342,14 @@ export const updateActivityLevelTemplate = async (id, workspace, blocksList) =>
     error: 'Failed to update the template for the activity',
   });
 
-export const updateActivityTemplate = async (id, workspace) =>
+export const updateActivityTemplate = async (id, workspace, replay) =>
   makeRequest({
     method: PUT,
     path: `${server}/activities/activity_template/${id}`,
     data: {
       activity_template: workspace,
       //blocks: blocksList,
+      replay,
     },
     auth: true,
     error: 'Failed to update the activity template for the activity',
@@ -451,7 +452,8 @@ export const updateLessonModule = async (
   name,
   expectations,
   standards,
-  link
+  link,
+  student_vis,
 ) =>
   makeRequest({
     method: PUT,
@@ -476,7 +478,8 @@ export const updateActivityDetails = async (
   link,
   scienceComponents,
   makingComponents,
-  computationComponents
+  computationComponents,
+  Student_vis,
 ) =>
   makeRequest({
     method: PUT,
@@ -491,6 +494,7 @@ export const updateActivityDetails = async (
       scienceComponents,
       makingComponents,
       computationComponents,
+      Student_vis,
     },
     auth: true,
     error: 'Failed to update unit',

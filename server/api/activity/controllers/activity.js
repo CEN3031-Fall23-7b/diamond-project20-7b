@@ -158,6 +158,7 @@ module.exports = {
   async activityTemplateUpdate(ctx) {
     // find the activity
     const { id } = ctx.params;
+    console.log(ctx.params, ctx.body);
     let activity = await strapi.services.activity.findOne({ id: id });
     if (!activity)
       return ctx.notFound(
@@ -167,6 +168,7 @@ module.exports = {
 
     // update template and blocks
     activity.activity_template = ctx.request.body.activity_template;
+    activity.replay = ctx.request.body.replay;
 
     const updatedActivity = await strapi.services.activity.update({ id: id }, activity);
     return sanitizeEntity(updatedActivity, { model: strapi.models.activity });

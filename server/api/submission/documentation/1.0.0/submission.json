@@ -648,6 +648,12 @@
               "activity_template": {
                 "type": "string"
               },
+              "replay": {
+                "type": "object"
+              },
+              "student_vis": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },
