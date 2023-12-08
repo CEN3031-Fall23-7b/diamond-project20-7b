@@ -5,7 +5,7 @@ import MentorCanvas from './canvas/MentorCanvas';
 import ContentCreatorCanvas from './canvas/ContentCreatorCanvas';
 import { useGlobalState } from '../../../Utils/userState';
 
-const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity, toggleSplit }) => {
+const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity, disableSplit, replayVisibility, toggleSplit }) => {
   const [value] = useGlobalState('currUser');
 
   const userRole = value.role;
@@ -14,7 +14,7 @@ const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity, toggleSplit }) =
     case 'DefaultUser':
       return <PublicCanvas activity={activity} isSandbox={isSandbox} />;
     case 'Student':
-      return <StudentCanvas activity={activity} toggleSplit={toggleSplit} />;
+      return <StudentCanvas activity={activity} disableSplit={disableSplit} replayVisibility={replayVisibility} toggleSplit={toggleSplit} />;
     case 'Mentor':
       return <MentorCanvas
       activity={activity}

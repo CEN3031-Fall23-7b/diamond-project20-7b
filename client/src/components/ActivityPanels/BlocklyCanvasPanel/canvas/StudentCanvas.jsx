@@ -20,7 +20,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 let plotId = 1;
 
-export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
+export default function StudentCanvas({ activity, toggleSplit, replayVisibility, disableSplit}) {
   const [hoverSave, setHoverSave] = useState(false);
   const [hoverUndo, setHoverUndo] = useState(false);
   const [hoverRedo, setHoverRedo] = useState(false);
@@ -242,14 +242,6 @@ export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
     }
   };
 
-  const handleToggleSplit = () => {
-    setSplitScreen(!splitScreen);
-  };
-  const handleToggleSplitD = () => {
-    setDisableSplit(!disableSplit);
-    setSplitOpen(false); // Close split-screen when disabling
-  };
-
   const buttonStyle = {
     marginTop: "-10px"
   }
@@ -395,9 +387,13 @@ export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
                     <Col id={"controls-container"}>
                     <div id='action-btn-container'>
 
+                    {/*Code Replay*/}
+                    { replayVisibility && (
                       <Link id='new-btn' className='btn' to={`/ccreplay/${activity.id}`}>
                         View Code Replay
                       </Link>
+                    )}
+                      
 
                       {/*Save*/}
                       <button
@@ -594,14 +590,16 @@ export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
           ></Alert>
         )}
       </div>
-
-      <div id={"split-screen-dragger"}>
-
+      {!disableSplit && (
+        <div id={"split-screen-dragger"}>
         <button
             onClick={toggleSplit}
             id='link'
             className='display-split-screen'
         >
+          {hoverSplit && (
+              <div className='popup ModalCompile'> Split Screen </div>
+          )}
           <i
               id='icon-btn'
               onMouseEnter={() => setHoverSplit(true)}
@@ -609,12 +607,12 @@ export default function StudentCanvas({ activity, toggleSplit, toggleSplitD }) {
           >
             <img id='arrow-icon-btn' src={SplitScreenArrows} alt={">>"}/>
           </i>
-          {hoverSave && (
-              <div className='popup ModalCompile4'> Split Screen </div>
-          )}
         </button>
 
       </div>
+      )}
+
+      
     </div>
   );
 }

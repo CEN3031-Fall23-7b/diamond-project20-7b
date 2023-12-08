@@ -887,11 +887,16 @@
           "activity_template": {
             "type": "string"
           },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
           "replay": {
             "type": "object"
-          },
-          "student_vis": {
-            "type": "boolean"
           }
         }
       },
@@ -937,11 +942,16 @@
           "activity_template": {
             "type": "string"
           },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
           "replay": {
             "type": "object"
-          },
-          "student_vis": {
-            "type": "boolean"
           },
           "created_by": {
             "type": "string"

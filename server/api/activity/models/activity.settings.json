@@ -47,11 +47,16 @@
       "type": "text",
       "required": false
     },
+    "student_vis": {
+      "type": "boolean",
+      "default": false
+    },
+    "replay_vis": {
+      "type": "boolean",
+      "default": false
+    },
     "replay": {
       "type": "json"
-    },
-    "student_vis": {
-      "type": "boolean"
     }
   }
 }

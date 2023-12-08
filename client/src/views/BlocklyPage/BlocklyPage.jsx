@@ -21,8 +21,8 @@ export default function BlocklyPage({ isSandbox }) {
   const navigate = useNavigate()
   //below modified to be true because of backend issues
   const [splitOpen, setSplitOpen] = useState(true)
-  const [splitScreenEnabled, setSplitScreenEnabled] = useState(false);
   const [disableSplit, setDisableSplit] = useState(false);
+  const [replayVisibility, setReplayVisibility] = useState(false);
 
   useEffect(() => {
     const setup = async () => {
@@ -72,6 +72,23 @@ export default function BlocklyPage({ isSandbox }) {
               message.error(res.err)
             }
           }
+          if(localActivity.student_vis == true) {
+            setDisableSplit(false)
+          } else if (localActivity.student_vis == false) {
+            setDisableSplit(true)
+          }
+          else {
+            setDisableSplit(false)
+          }
+      
+          if(localActivity.replay_vis == true) {
+            setReplayVisibility(true)
+          } else if (localActivity.replay_vis == false) {
+            setReplayVisibility(false)
+          }
+          else {
+            setReplayVisibility(false)
+          }
         } else {
           navigate(-1)
         }
@@ -89,27 +106,9 @@ export default function BlocklyPage({ isSandbox }) {
         setLeftPaneSize(newSize);
       }
     };
-
+  
   const handleToggleSplit = () => {
-    const localActivity = JSON.parse(localStorage.getItem('my-activity'));
-    if(localActivity.student_vis == true)
-      if (!disableSplit) {
-        setSplitOpen(!splitOpen);
-      }
-    else{
-      setSplitOpen(false);
-    }
-  };
-  //handles toggling split-screen 
-  const handleToggleSplitD = () => {
-    setDisableSplit(!disableSplit);
-    setSplitOpen(false); //Close split-screen when disabling
-  };
-
-  const displayCodeReplay = () => {
-    <Link id='replay-btn' className='btn' to={`/ccreplay/${activity.id}`}>
-            View Code Replay
-    </Link>
+    setSplitOpen(!splitOpen);
   };
 
     return (
@@ -125,13 +124,12 @@ export default function BlocklyPage({ isSandbox }) {
             pane1Style={{ minWidth: '50%'}}
             className="flex flex-row"
             >
-                <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} toggleSplit={handleToggleSplit}/>
+                <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} disableSplit={disableSplit} replayVisibility={replayVisibility} toggleSplit={handleToggleSplit}/>
                 <Blank />
             </SplitPane>
-          ) :
-          (
-            <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} toggleSplit={handleToggleSplit} />
-          )}
+          ) : (
+            <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} disableSplit={disableSplit} replayVisibility={replayVisibility} toggleSplit={handleToggleSplit} />
+          )} 
         </div>
     )
 }

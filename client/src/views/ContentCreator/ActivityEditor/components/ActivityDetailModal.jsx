@@ -53,6 +53,7 @@ const ActivityDetailModal = ({
       setLink(response.data.link)
       setLinkError(false)
       console.log(response.data.student_vis)
+      console.log(activity)
       setStudent_vis(response.data.student_vis)
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
