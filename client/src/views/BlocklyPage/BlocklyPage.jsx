@@ -58,6 +58,7 @@ export default function BlocklyPage({ isSandbox }) {
       // else show toolbox based on the activity we are viewing
       else {
         const localActivity = JSON.parse(localStorage.getItem("my-activity"))
+        console.log(localActivity)
         if (localActivity) {
           if (localActivity.toolbox) {
             setActivity(localActivity)
@@ -78,7 +79,7 @@ export default function BlocklyPage({ isSandbox }) {
             setDisableSplit(true)
           }
           else {
-            setDisableSplit(false)
+            setDisableSplit(true)
           }
       
           if(localActivity.replay_vis == true) {
