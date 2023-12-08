@@ -886,6 +886,17 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay": {
+            "type": "object"
           }
         }
       },
@@ -930,6 +941,17 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay": {
+            "type": "object"
           },
           "created_by": {
             "type": "string"

@@ -1,6 +1,6 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal,Checkbox } from "antd"
 import React, { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import {
   getLessonModule,
   updateLessonModule,
@@ -21,6 +21,7 @@ export default function LessonEditor({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [displayName, setDisplayName] = useState(learningStandard.name)
+  const [visibleVal, setVisibleVal] = useState(false)
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
@@ -56,7 +57,7 @@ export default function LessonEditor({
       name,
       description,
       standards,
-      link
+      link,
     )
     if (response.err) {
       message.error("Fail to update lesson")
@@ -127,7 +128,16 @@ export default function LessonEditor({
               placeholder="Enter lesson standards"
             />
           </Form.Item>
-          <Form.Item label="Link to Additional Resources (Optional)">
+          
+          <Form.Item
+            label="Visible to students"
+            name = "visibleToStudents"
+            valuePropName="checked"
+          >
+            <Checkbox onChange = {e => setVisibleVal(e.target.checked)}/>
+          </Form.Item>
+
+          <Form.Item label="Link to Additional Resources (Optionals)">
             <Input
               onChange={e => {
                 setLink(e.target.value)
@@ -138,6 +148,16 @@ export default function LessonEditor({
               placeholder="Enter a link"
             />
           </Form.Item>
+          
+          <Form.Item
+            label="Add Code Replay"
+            name="addcodereplay"
+          >
+            <Link id='replay-btn' className='btn' to={`/replay/1`}>
+              Add
+            </Link>
+          </Form.Item>
+
           <Form.Item
             wrapperCol={{
               offset: 8,

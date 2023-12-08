@@ -1,6 +1,6 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal,Checkbox } from "antd"
 import React, { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import {
   createActivity,
   createLessonModule,
@@ -25,6 +25,7 @@ export default function LessonModuleCreator({
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
+  const [visibleVal, setVisibleVal] = useState(false);
   // eslint-disable-next-line
   const [_, setSearchParams] = useSearchParams()
 
@@ -192,6 +193,16 @@ export default function LessonModuleCreator({
               placeholder="Enter lesson Standards"
             />
           </Form.Item>
+          <Form.Item
+            label="Visible to Students"
+            name = "visibleToStudents"
+            valuePropName="checked"
+          >
+            <Checkbox onChange={e => setVisibleVal(e.target.checked)}/>
+          </Form.Item>
+          
+          
+
           <Form.Item label="Link to Additional Resource (Optional)">
             <Input
               onChange={e => {
@@ -203,6 +214,16 @@ export default function LessonModuleCreator({
               placeholder="Enter a link"
             />
           </Form.Item>
+
+          <Form.Item
+            label="Add Code Replay"
+            name="addcodereplay"
+          >
+            <Link id='replay-btn' className='btn' to={`/replay/1`}>
+              Add
+            </Link>
+          </Form.Item>
+
           <Form.Item
             wrapperCol={{
               offset: 8,

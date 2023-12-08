@@ -1,8 +1,13 @@
 import { message } from "antd"
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import BlocklyCanvasPanel from "../../components/ActivityPanels/BlocklyCanvasPanel/BlocklyCanvasPanel"
 import NavBar from "../../components/NavBar/NavBar"
+import Blank from "./Blank";
+import SplitPane from 'react-split-pane';
+import CodeReplay from './CodeReplay'
+import './Blank.css'
+
 import {
   getAuthorizedWorkspaceToolbox,
   getActivityToolbox,
@@ -14,9 +19,14 @@ export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
   const [activity, setActivity] = useState({})
   const navigate = useNavigate()
+  //below modified to be true because of backend issues
+  const [splitOpen, setSplitOpen] = useState(true)
+  const [disableSplit, setDisableSplit] = useState(false);
+  const [replayVisibility, setReplayVisibility] = useState(false);
 
   useEffect(() => {
     const setup = async () => {
+      
       // if we are in sandbox mode show all toolbox
       const sandboxActivity = JSON.parse(localStorage.getItem("sandbox-activity"))
       if (isSandbox) {
@@ -48,7 +58,7 @@ export default function BlocklyPage({ isSandbox }) {
       // else show toolbox based on the activity we are viewing
       else {
         const localActivity = JSON.parse(localStorage.getItem("my-activity"))
-
+        console.log(localActivity)
         if (localActivity) {
           if (localActivity.toolbox) {
             setActivity(localActivity)
@@ -63,6 +73,23 @@ export default function BlocklyPage({ isSandbox }) {
               message.error(res.err)
             }
           }
+          if(localActivity.student_vis == true) {
+            setDisableSplit(false)
+          } else if (localActivity.student_vis == false) {
+            setDisableSplit(true)
+          }
+          else {
+            setDisableSplit(true)
+          }
+      
+          if(localActivity.replay_vis == true) {
+            setReplayVisibility(true)
+          } else if (localActivity.replay_vis == false) {
+            setReplayVisibility(false)
+          }
+          else {
+            setReplayVisibility(false)
+          }
         } else {
           navigate(-1)
         }
@@ -72,12 +99,38 @@ export default function BlocklyPage({ isSandbox }) {
     setup()
   }, [isSandbox, navigate, value.role])
 
-  return (
-    <div className="container nav-padding">
-      <NavBar />
-      <div className="flex flex-row">
-        <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
-      </div>
-    </div>
-  )
+    const [leftPaneSize, setLeftPaneSize] = useState('50%');
+    
+    const handleDrag = newSize => {
+      // The new size is greater than or equal to 50% of the window width
+      if (newSize >= window.innerWidth / 2) {
+        setLeftPaneSize(newSize);
+      }
+    };
+  
+  const handleToggleSplit = () => {
+    setSplitOpen(!splitOpen);
+  };
+
+    return (
+        <div className="container nav-padding">
+          <NavBar />
+          { splitOpen && !disableSplit ? (
+            <SplitPane
+            split="vertical"
+            minSize="50%"
+            maxSize={-1} // No maximum size restriction
+            defaultSize={leftPaneSize}
+            onChange={handleDrag}
+            pane1Style={{ minWidth: '50%'}}
+            className="flex flex-row"
+            >
+                <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} disableSplit={disableSplit} replayVisibility={replayVisibility} toggleSplit={handleToggleSplit}/>
+                <Blank />
+            </SplitPane>
+          ) : (
+            <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} disableSplit={disableSplit} replayVisibility={replayVisibility} toggleSplit={handleToggleSplit} />
+          )} 
+        </div>
+    )
 }

@@ -81,7 +81,7 @@ const Replay = () => {
   const [actionFilter, setActionFilter] = useState([]);
   const [blockTypeFilter, setBlockTypeFilter] = useState([]);
   const [blockIdFilter, setBlockIdFilter] = useState([]);
-
+  
   const [timelineStates, dispatchTimelineReducer] = useReducer(
     timelineReducer,
     {

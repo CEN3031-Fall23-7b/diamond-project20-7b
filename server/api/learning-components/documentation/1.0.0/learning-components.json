@@ -586,6 +586,15 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "student_vis": {
+                  "type": "boolean"
+                },
+                "replay_vis": {
+                  "type": "boolean"
+                },
+                "replay": {
+                  "type": "object"
+                },
                 "created_by": {
                   "type": "string"
                 },

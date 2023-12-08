@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/12/2023 1:28:43 PM"
+    "x-generation-date": "12/08/2023 10:07:47 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11873,6 +11873,17 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay": {
+            "type": "object"
           }
         }
       },
@@ -11917,6 +11928,17 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "student_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay_vis": {
+            "type": "boolean",
+            "default": false
+          },
+          "replay": {
+            "type": "object"
           },
           "created_by": {
             "type": "string"
@@ -12697,6 +12719,15 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "student_vis": {
+                  "type": "boolean"
+                },
+                "replay_vis": {
+                  "type": "boolean"
+                },
+                "replay": {
+                  "type": "object"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -12832,6 +12863,15 @@
                 },
                 "activity_template": {
                   "type": "string"
+                },
+                "student_vis": {
+                  "type": "boolean"
+                },
+                "replay_vis": {
+                  "type": "boolean"
+                },
+                "replay": {
+                  "type": "object"
                 },
                 "created_by": {
                   "type": "string"
@@ -13169,6 +13209,15 @@
               },
               "activity_template": {
                 "type": "string"
+              },
+              "student_vis": {
+                "type": "boolean"
+              },
+              "replay_vis": {
+                "type": "boolean"
+              },
+              "replay": {
+                "type": "object"
               },
               "created_by": {
                 "type": "string"
@@ -14246,6 +14295,15 @@
               },
               "activity_template": {
                 "type": "string"
+              },
+              "student_vis": {
+                "type": "boolean"
+              },
+              "replay_vis": {
+                "type": "boolean"
+              },
+              "replay": {
+                "type": "object"
               },
               "created_by": {
                 "type": "string"
