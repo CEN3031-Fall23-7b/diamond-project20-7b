@@ -496,7 +496,7 @@ export const updateActivityDetails = async (
       scienceComponents,
       makingComponents,
       computationComponents,
-      student_vis,
+      student_vis, // added variable to change on workspace view
     },
     auth: true,
     error: 'Failed to update unit',

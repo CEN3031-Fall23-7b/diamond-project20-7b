@@ -7,7 +7,7 @@ const MAKING = 2;
 const COMPUTATION = 3;
 
 module.exports = {
-  // update activity description and objective
+  // update activity  ription and objective
   async update(ctx) {
     const { id } = ctx.params;
 

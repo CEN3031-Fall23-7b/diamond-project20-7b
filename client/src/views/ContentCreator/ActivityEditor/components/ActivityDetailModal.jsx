@@ -129,7 +129,7 @@ const ActivityDetailModal = ({
       scienceComponents,
       makingComponents,
       computationComponents,
-      student_vis,
+      student_vis, // added variable to change on workspace view
     )
     if (res.err) {
       message.error(res.err)
