@@ -46,7 +46,7 @@ const Blank = () => {
         <p style={paragraphStyle}>{longText}</p>
       </div>
         <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowFullScreen width="640" height="360"></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/XB4MIexjvY0?si=4YDnBR2MJ_LPJ584" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       <div style={blobStyle}>
         <h2>Heading</h2>

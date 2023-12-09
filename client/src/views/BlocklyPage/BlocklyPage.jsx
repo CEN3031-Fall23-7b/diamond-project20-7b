@@ -17,7 +17,9 @@ export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
   const [activity, setActivity] = useState({})
   const navigate = useNavigate()
-  const [splitOpen, setSplitOpen] = useState(false)
+  const [splitOpen, setSplitOpen] = useState(true);
+  const [leftPaneSize, setLeftPaneSize] = useState('50%');
+  
 
   useEffect(() => {
     const setup = async () => {
@@ -76,68 +78,67 @@ export default function BlocklyPage({ isSandbox }) {
 
     setup()
   }, [isSandbox, navigate, value.role])
-  /*
-    return (
+
+
+  const handleDrag = newSize => {
+    // The new size is greater than or equal to 50% of the window width
+    if (newSize >= window.innerWidth / 2) {
+      setLeftPaneSize(newSize);
+    }
+  };
+
+
+    const handleToggleSplit = () => {
+    setSplitOpen(!splitOpen);
+    setLeftPaneSize(splitOpen ? '50%' : '100%'); // Adjust the size based on splitOpen state
+  };
+
+  const handleSwapSides = () => {
+    setSplitOpen(!splitOpen);
+    setLeftPaneSize(splitOpen ? '50%' : '50%');
+  };
+
+  return (
     <div className="container nav-padding">
       <NavBar />
-      <div className="split-screen" style={splitScreenStyle}>
-        <div style={childDivStyle}>
-          <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
-        </div>
-        
-        <div style={childDivStyle}>
-          <Blank/>
-       </div>
-      </div>
+      {/* On click swap sides of panes */}
+      <button onClick={handleSwapSides}>Swap Sides</button>
+      {/* On click Toggles split-screen on or off */}
+      <button onClick={handleToggleSplit}>Toggle Split</button>
+      <SplitPane
+        split="vertical"
+        minSize="50%"
+        maxSize={-1}
+        defaultSize={leftPaneSize}
+        onChange={handleDrag}
+        pane1Style={{ minWidth: '50%' }}
+      >
+
+        {/* if BlocklyCanvasPanel is open swap with Blank */}
+        {splitOpen ? (
+          <BlocklyCanvasPanel
+            activity={activity}
+            setActivity={setActivity}
+            isSandbox={isSandbox}
+            toggleSplit={handleToggleSplit}
+          />
+        ) : (
+          <Blank />
+        )}
+
+        {/* if Blank is open swap with BlocklyCanvasPanel */}
+        {splitOpen ? (
+          <Blank />
+        ) : (
+          <BlocklyCanvasPanel
+            activity={activity}
+            setActivity={setActivity}
+            isSandbox={isSandbox}
+            toggleSplit={handleToggleSplit}
+          />
+        )}
+      </SplitPane>
     </div>
-  )
-  */
+  );
+};
 
-  /*
-     <div className="split-screen" style={splitScreenStyle}>
-        <div style={childDivStyle}>
-          <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} />
-        </div>
-        
-        <div style={childDivStyle2}>
-          <Blank/>
-       </div>
-      </div>
-  */
-
-      const [leftPaneSize, setLeftPaneSize] = useState('50%');
-
-      const handleDrag = newSize => {
-        // The new size is greater than or equal to 50% of the window width
-        if (newSize >= window.innerWidth / 2) {
-          setLeftPaneSize(newSize);
-        }
-      };
-
-      const handleToggleSplit = () => {
-        setSplitOpen(!splitOpen);
-      };
-
-      return (
-        <div className="container nav-padding">
-          <NavBar />
-          { splitOpen ? (
-            <SplitPane
-            split="vertical"
-            minSize="59%"
-            maxSize={-1} // No maximum size restriction
-            defaultSize={leftPaneSize}
-            onChange={handleDrag}
-            pane1Style={{ minWidth: '59%'}}
-            >
-              <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} toggleSplit={handleToggleSplit}/>
-              {/* someone else implements this blank */}
-              <Blank/>
-
-            </SplitPane>
-          ) : (
-            <BlocklyCanvasPanel activity={activity} setActivity={setActivity} isSandbox={isSandbox} toggleSplit={handleToggleSplit} />
-          )}
-        </div>
-    )
-  }
