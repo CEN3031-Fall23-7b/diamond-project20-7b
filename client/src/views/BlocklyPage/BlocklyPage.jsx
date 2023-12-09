@@ -20,7 +20,6 @@ export default function BlocklyPage({ isSandbox }) {
   const [activity, setActivity] = useState({})
   const navigate = useNavigate()
   const [splitOpen, setSplitOpen] = useState(false)
-  const [splitScreenEnabled, setSplitScreenEnabled] = useState(false);
   const [disableSplit, setDisableSplit] = useState(false);
 
   useEffect(() => {
@@ -90,7 +89,8 @@ export default function BlocklyPage({ isSandbox }) {
     };
 
   const handleToggleSplit = () => {
-    const localActivity = JSON.parse(localStorage.getItem('my-activity'));
+    var localActivity = JSON.parse(localStorage.getItem('my-activity'));
+    console.log(localActivity)
     if(localActivity.student_vis == true)
       if (!disableSplit) {
         setSplitOpen(!splitOpen);
