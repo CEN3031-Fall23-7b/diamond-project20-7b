@@ -19,8 +19,7 @@ export default function BlocklyPage({ isSandbox }) {
   const [value] = useGlobalState("currUser")
   const [activity, setActivity] = useState({})
   const navigate = useNavigate()
-  //below modified to be true because of backend issues
-  const [splitOpen, setSplitOpen] = useState(true)
+  const [splitOpen, setSplitOpen] = useState(false)
   const [disableSplit, setDisableSplit] = useState(false);
   const [replayVisibility, setReplayVisibility] = useState(false);
 
