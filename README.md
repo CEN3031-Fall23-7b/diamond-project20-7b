@@ -171,6 +171,12 @@ Workspaces - Lesson View Updates/Features
 ![image](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/109041590/095f738b-3126-4c31-91fe-638806b9ef95)
 - Lesson page size can be adjusted/resized with a slider
 
+> Button to swap the sides of the split-screen
+
+![image](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/102096126/0234d97d-55c0-4fb1-a57d-d83f3c39d1a0)
+<img width="1440" alt="Screenshot 2023-12-13 at 5 28 38 PM" src="https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/102096126/18399e97-96e1-401a-867e-6a2bd5ce2dc9">
+
+- Swaps the postion of the code view and lesson view
 
 > Workspace view with lesson view page closed
 
