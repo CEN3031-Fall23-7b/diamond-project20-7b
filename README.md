@@ -155,13 +155,15 @@ Workspaces - Lesson View Updates/Features
 - Lesson page properly displays and plays imbedded video replays
 
 
-> Code Replay Screen (no replay has been loaded)
+> Code Replay Screen
 
-![image](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/109041590/a9c0116d-f8e9-46bc-b2bd-1c4391ec848b)
-![image](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/109041590/0df91393-34e3-4f56-bc71-31cc27c9a4bc)
-- Created typical features such as speed up, slow down, seek, play, pause, back, and forward for video playback
-- Code replay video can be loaded under "Code Replay" box
-- Logs section to display the code replay logs of the code changes
+![codereplay_image1](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/93087101/f447d844-17e3-4788-9e6a-b3569a89ba1c)
+![codereplay_image2](https://github.com/CEN3031-Fall23-7b/diamond-project20-7b/assets/93087101/64c1f644-d6fc-4436-9677-5996bd01be59)
+
+- Created button in activity editor linking to an environment for content creators to record their own code replay.
+- Stored actions that content creators take in this environment in the backend, linked to the activity that was being edited at the time.
+- Created "Code Replay" box in the student’s lesson view, linking them to the code replay environment which corresponds to the lesson.
+-Displayed code replay for students once they choose to access it.
 
 
 > Slider functionality displayed for split screen
@@ -218,14 +220,14 @@ Raymond Chen, Ethan Cheung, Sebastian Deschler, Andy Millian, Sai Chandu Naru, a
 
    > Grant permission to the **scripts** and **server** directories if you are prompted
 
-3. Log in to [localhost:1337/admin/auth/login](http://localhost:1337/admin/auth/login) with the Strapi Super Admin account > Activities > Click any activity > check if student_vis and replay_vis are there
-   > If student_vis and replay_vis are not visible on the page, go to Content-Types Builder click "ADD ANOTHER FIELD TO THIS COLLECTION TYPE" and add boolean fields student_vis and replay_vis
+3. Log in to [localhost:1337/admin/auth/login](http://localhost:1337/admin/auth/login) with the Strapi Super Admin account > Activities > Click any activity > check if student_vis and Replay are there
+   > If student_vis and replay_vis are not visible on the page, go to Content-Types Builder click "ADD ANOTHER FIELD TO THIS COLLECTION TYPE" and add a boolean field student_vis and a JSON field Replay
 
 4. Log in to [localhost:3000/teacherlogin](http://localhost:3000/teacherlogin) with the Content Creator Account
 5. Update any activity to enable split screen functionality
    - Ex. Click The Boggart, Check off "Visible to students", click next, click Activity 1, select "Split Screen Visible to Student"
-6. Add Code Replay does not yet update the Strapi API to enable code replay, so go back to Activities collection in the Strapi API and manually turn on replay_vis to enable to display Code Replay functionality in workspace
-   - Ex. Activities > ID 948 > Select Replay_vis "ON"
+6. For any activity, go into the "Save and Set Code Replay" environment to record a demo video.
+   - Ex. Click The Boggart, click next, click Activity 1, click "Save and Set Code Replay", make any changes to the workspace, click save
 
 7. Log in to [localhost:3000](https://localhost:3000) under a student account and view activity workspace to see changes
    - Ex. Log into any Defense Against the Dark Arts student account (Join Code: 1997) > Select The Boggart: Activity 1
